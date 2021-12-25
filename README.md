@@ -11,3 +11,4 @@
 - JUnit5
 - DataSize
 - 로그 그룹
+- Actuator 관련 변경
