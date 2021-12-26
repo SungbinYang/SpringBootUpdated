@@ -21,3 +21,7 @@
 - 성능 개선
 - @ConfigurationProperties 개선
 - Actuator, health 엔드포인트 변경
+
+## 스프링 부트 2.3
+
+- 스프링 부트 2.3 변경 내역 소개
