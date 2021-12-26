@@ -20,3 +20,4 @@
 - 의존성 및 프로퍼티 변경
 - 성능 개선
 - @ConfigurationProperties 개선
+- Actuator, health 엔드포인트 변경
