@@ -19,3 +19,4 @@
 - 스프링 HATEOAS API 변경 내역
 - 의존성 및 프로퍼티 변경
 - 성능 개선
+- @ConfigurationProperties 개선

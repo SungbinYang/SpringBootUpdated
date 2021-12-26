@@ -34,3 +34,39 @@
 - 단점은?
     * 요청 처리 시간이 느려질 수 있다. 아직 초기화 하지 않은 빈을 만드느라...
     * 애플리케이션 구동시 발생해야 했던 에러가 애플리케이션 동작 중에 발생할 수 있다.
+
+## @ConfigurationProperties 개선
+- @ConfigurationPropertiesScan
+    * 스프링 부트 2.2부터 @ConfigurationProperties를 스캔해서 빈으로 등록하는 기능을 제공한다.
+        * @SpringBootApplication에 추가로 선언하면 편하다.
+
+    ```java
+    @SpringBootApplication
+    @ConfigurationPropertiesScan
+    public class DemoSpringboot22Application {
+    
+    }
+    ```
+  
+- Immutable @ConfigurationProperties 지원
+    * 세터(setter)가 아닌 생성자를 사용해서 프로퍼티를 바인딩할 수 있는 기능을 지원한다.
+        * @ConfigurationPropertiesScan 또는 @EnableConfigurationProperties를 통해 빈으로 만드는 경우에만 동작한다. 그밖에 다른 방법을 사용해서 빈으로 등록할 때는 적용되지 않는다.
+        * 생성자가 여러개일 경우에는 바인딩에 사용할 생성자에 @ConstructorBinding을 추가해야 한다.
+        * 롬복과 같이 사용한다면?
+    
+    ```java
+    @Getter
+    @AllArgsConstructor
+    @ConstructorBinding
+    @ConfigurationProperties(prefix = "chicken")
+    public class ChickenProperties {
+    
+        private int count;
+    
+        private String name;
+    
+        private DataSize size;
+    }
+    ```
+- 참고
+    * https://docs.spring.io/spring-boot/docs/2.2.0.RELEASE/reference/html/spring-boot-features.html#boot-features-external-config-constructor-binding
