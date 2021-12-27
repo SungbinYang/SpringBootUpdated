@@ -26,3 +26,29 @@ docker run --rm -p 8080:8080 demo-springboot23
     * https://github.com/wagoodman/dive
 - 참고
     * https://docs.spring.io/spring-boot/docs/2.3.0.RELEASE/maven-plugin/reference/html/#introduction
+
+## 보다 효율적인 도커 이미지 만들기
+- 스프링 부트 JAR 파일 구성 요소
+  * BOOT-INF/lib: 라이브러리
+  * BOOT-INF/classes: 애플리케이션 코드 및 리소스
+  * META-INF: MANIFEST와 maven 프로퍼티 및 pom.xml
+- 가장 변하지 않는 것부터 이미지 레이어 쌓기
+
+  ![](./img01.png)
+
+  * 변하지 않은 레이어는 캐시를 사용하기 때문에 빌드가 더 효율적이다.
+- 효율적인 Dockerfile 설정
+
+```dockerfile
+FROM openjdk:11.0.8-jdk-slim AS builder
+WORKDIR source
+ARG JAR_FILE=target/demo*.jar
+COPY ${JAR_FILE} application.jar
+RUN jar -xf ./application.jar
+
+FROM openjdk:11.0.8-jre-slim
+WORKDIR application
+COPY --from=builder source/BOOT-INF/lib lib
+COPY --from=builder source/BOOT-INF/classes app
+ENTRYPOINT ["java","-cp","app:lib/*","me.sungbin.demospringboot23prop.App"]
+```
