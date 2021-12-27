@@ -52,3 +52,35 @@ COPY --from=builder source/BOOT-INF/lib lib
 COPY --from=builder source/BOOT-INF/classes app
 ENTRYPOINT ["java","-cp","app:lib/*","me.sungbin.demospringboot23prop.App"]
 ```
+
+## 스프링 부트로 효율적인 도커 이미지 만들기
+- 스프링 부트 2.3+에서 계층형 빌드 설정
+
+```xml
+<plugin>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-maven-plugin</artifactId>
+    <configuration>
+        <layers>
+            <enabled>true</enabled>
+        </layers>
+    </configuration>
+</plugin>
+```
+
+- 계층형 빌드 JAR 실행하기
+
+```bash
+java -Djarmode=layertools -jar demo.jar 
+```
+
+- 스프링 부트 기본 계층
+
+![](./img02.png)
+  
+  * Application: 애플리케이션 코드 및 리소스
+  * Snapshot 라이브러리: 버전이 SNAPSHOT인 라이브러리
+  * 스프링 부트 로더: 스프링 부트 JAR 실행기 들어있는 패키지
+  * Dependencies: 버전이 SNAPSHOT이 아닌 라이브러리
+- 참고
+  * https://docs.spring.io/spring-boot/docs/2.3.0.RELEASE/maven-plugin/reference/html/#repackage-layers
