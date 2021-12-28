@@ -84,3 +84,21 @@ java -Djarmode=layertools -jar demo.jar
   * Dependencies: 버전이 SNAPSHOT이 아닌 라이브러리
 - 참고
   * https://docs.spring.io/spring-boot/docs/2.3.0.RELEASE/maven-plugin/reference/html/#repackage-layers
+
+## Graceful 셧다운
+- 애플리케이션 서버 종료시 새로운 요청은 막고 기존에 처리중인 요청은 완전히 처리한 이후에 서버를 종료하는 기능 지원
+
+```properties
+server.shutdown=graceful
+```
+
+  * 서블릿 기반 MVC와 리액티브 스트림 기반 웹 플럭스 모두 지원.
+  * 톰캣, 제티, 네티는 새 요청을 네트워크 단에서 받지 않고 기존 요청을 계속 진행하지만, 언더토우는 새 요청에 응답으로  service unavailable (503) 응답을 보낸다.
+  * 기존 요청 처리에 타임아웃을 설정할 수 있다.
+
+```properties
+spring.lifecycle.timeout-per-shutdown-phase=20s
+```
+
+- 참고
+  * https://docs.spring.io/spring-boot/docs/2.3.0.RELEASE/reference/html/spring-boot-features.html#boot-features-graceful-shutdown
