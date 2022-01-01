@@ -49,3 +49,17 @@ public void onStateChanged(AvailabilityChangeEvent<ReadinessState> readiness) {
 
 - 참고
     * https://spring.io/blog/2020/03/25/liveness-and-readiness-probes-with-spring-boot
+
+## Liveness와 Readiness 쿠버네티스 연동
+- 스프링 부트 애플리케이션 이벤트에 따라 Liveness와 Readiness가 달라진다.
+- 쿠버네티스의 Liveness probe
+  * 특정 횟수 (기본값 3회) 이상 Liveness 상태가 안좋은 경우 해당 애플리케이션을 재시작한다.
+- 쿠버네티스의 Readiness probe
+  * Readiness 상태가 안좋은 경우 해당 pod로 요청을 보내지 않는다.
+
+  ![](./img01.png)
+
+- 참고
+  * https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
+  * https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-application-availability-readiness-state
+  * https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html#production-ready-kubernetes-probes

@@ -16,18 +16,21 @@ public class ControlPlaneController {
     @Autowired
     ApplicationContext applicationContext;
 
+    @Autowired
+    LocalhostService localhostService;
+
     @GetMapping("/block")
     public String block() {
         AvailabilityChangeEvent.publish(applicationContext, this, ReadinessState.REFUSING_TRAFFIC);
 
-        return "Blocked requests";
+        return "Blocked requests" + localhostService.getLocalHostInfo();
     }
 
     @GetMapping("/turnoff")
     public String turnOff() {
         AvailabilityChangeEvent.publish(applicationContext, this, LivenessState.BROKEN);
 
-        return "Broken";
+        return "Broken " + localhostService.getLocalHostInfo();
     }
 
     @Async
@@ -36,7 +39,7 @@ public class ControlPlaneController {
         System.out.println("State is changed to " + readiness.getState());
 
         if (readiness.getState() == ReadinessState.REFUSING_TRAFFIC) {
-            Thread.sleep(5000L);
+            Thread.sleep(15000L);
             AvailabilityChangeEvent.publish(applicationContext, this, ReadinessState.ACCEPTING_TRAFFIC);
         }
     }

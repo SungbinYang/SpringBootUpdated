@@ -11,8 +11,11 @@ public class HelloController {
     @Autowired
     ApplicationAvailability applicationAvailability;
 
+    @Autowired
+    LocalhostService localhostService;
+
     @GetMapping("/hello")
     public String hello() {
-        return "Application is now " + applicationAvailability.getLivenessState() + " " + applicationAvailability.getReadinessState();
+        return "Application is now " + applicationAvailability.getLivenessState() + " " + applicationAvailability.getReadinessState() + " " + localhostService.getLocalHostInfo();
     }
 }
