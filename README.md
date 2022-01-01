@@ -32,3 +32,4 @@
 - Graceful 셧다운
 - Liveness와 Readiness
 - Liveness와 Readiness 쿠버네티스 연동
+- @ConfigurationProperties 퀴즈
