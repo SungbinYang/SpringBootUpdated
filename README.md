@@ -30,3 +30,4 @@
 - 보다 효율적인 도커 이미지 만들기
 - 스프링 부트로 효율적인 도커 이미지 만들기
 - Graceful 셧다운
+- Liveness와 Readiness
