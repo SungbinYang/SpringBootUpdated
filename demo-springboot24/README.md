@@ -174,3 +174,14 @@ spring.profiles.group.local=localService,localController
 
 - 참고
   * https://docs.spring.io/spring-boot/docs/2.4.0-SNAPSHOT/reference/htmlsingle/#boot-features-profiles-groups
+
+## 설정 파일 변경 마무리
+- 설정 파일 추가 기능 확장
+  * 커스텀한 접두어를 제공할 수 있는 확장 방법을 제공한다.
+  * 가령, redis:, zookeeper: 등 [ConfigDataLocationResolver](https://docs.spring.io/spring-boot/docs/2.4.0-SNAPSHOT/api/org/springframework/boot/context/config/ConfigTreeConfigDataLocationResolver.html) 와 [ConfigDataLoader](https://docs.spring.io/spring-boot/docs/2.4.0-SNAPSHOT/api/org/springframework/boot/context/config/ConfigData.html) 참고할 것.
+- 난 이 모든게 복잡하고 이전처럼 쓰고 싶다.
+  * spring.config.use-legacy-processing=true
+  * 스프링 부트 2.3과 동일하게 처리한다.
+- 그냥 스프링 부트 2.4로 업데이트해도 괜찮은 경우
+  * application.yaml 사용하지 않는다.
+  * application-{profile}.properties를 많이 사용하지 않는다.
