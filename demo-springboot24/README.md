@@ -145,3 +145,20 @@ config/
 ```bash
 kubectl exec --stdin --tty [Pod 이름] -- /bin/bash
 ```
+
+## 클라우드 플랫폼 기반 설정
+- 특정 클라우드 플랫폼에 배포했을 때 설정 파일 사용하기
+  * spring.config.activate.on-cloud-platform의 값으로 CloudPlatform을 사용할 수 있다.
+  * 특정 프로파일이 아니라 특정한 클라우드 플랫폼에 배포했을 때 설정 파일을 사용하도록 설정할 수 있다. 
+- 지원하는 클라우드 플랫폼 (CloudPlatform)
+  * Kubernetes
+  * Cloud Foundary
+  * Heroku
+  * SAP
+  * NONE
+- application.properties
+
+  ```properties
+  spring.config.activate.on-cloud-platform=kubernetes
+  spring.config.import=classpath:k8s-test.properties
+  ```
