@@ -35,3 +35,7 @@
 - @ConfigurationProperties 퀴즈
 - Actuator, configprops 엔드포인트
 - Properties 파일에 한글을 쓰면 왜 깨지는걸까?
+
+## 스프링 부트 2.4
+
+- 스프링 부트 2.4 변경 내역 소개
