@@ -45,3 +45,4 @@
 - Configuration Tree 지원
 - 스프링 부트와 쿠버네티스 ConfigMap 연동
 - 클라우드 플랫폼 기반 설정
+- 프로파일 그룹

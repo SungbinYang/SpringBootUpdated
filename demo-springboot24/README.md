@@ -162,3 +162,15 @@ kubectl exec --stdin --tty [Pod 이름] -- /bin/bash
   spring.config.activate.on-cloud-platform=kubernetes
   spring.config.import=classpath:k8s-test.properties
   ```
+
+## 프로파일 그룹
+- 프로파일을 세밀하게 만든 경우, 특정 프로파일 하나에 다른 여러 프로파일을 그룹으로 묶어서 동시에 사용할 수 있다.
+
+```properties
+spring.profiles.group.local=localService,localController
+```
+
+  * local이라는 프로파일을 사용할 때 localServie와 localController 프로파일도 사용함.
+
+- 참고
+  * https://docs.spring.io/spring-boot/docs/2.4.0-SNAPSHOT/reference/htmlsingle/#boot-features-profiles-groups
