@@ -63,3 +63,34 @@ public void onStateChanged(AvailabilityChangeEvent<ReadinessState> readiness) {
   * https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
   * https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-application-availability-readiness-state
   * https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html#production-ready-kubernetes-probes
+
+## Actuator, configprops 엔드포인트
+- 퀴즈! service.message로 입력받은 문자열을 ServiceProperties 클래스의 message라는 변수로 바인딩 받아 보세요. (스프링 부트 2.2에서 배웠습니다.)
+  * @ConfigurationProperties를 사용할 것.
+  * 스캐닝을 사용해서 빈으로 등록할 것.
+  * 생성자 주입을 사용해서 immutable하게 만들 것.
+- 스프링 부트 2.3의 actuactor/configprops 엔드포인트 변경 내역
+  * 프로퍼티 값을 어디서 읽어왔는지 알려준다.
+
+  ```json
+  "inputs": {
+    "message": {
+      "origin": "class path resource [application.properties]:4:17",
+    "value": "classpath message"
+    }
+  }
+  ```
+
+- Actuator 엔드포인트 공개
+  
+  ```properties
+  // 선별적인 공개
+  management.endpoints.web.exposure.include=info,health,configprops
+  
+  // 모두 공개 이후 선별적인 비공개
+  management.endpoints.web.exposure.include=*
+  management.endpoints.web.exposure.exclude=shutdown
+  ```
+
+- 참고
+  * https://docs.spring.io/spring-boot/docs/current/actuator-api/html/#overview

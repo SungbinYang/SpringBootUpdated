@@ -33,3 +33,4 @@
 - Liveness와 Readiness
 - Liveness와 Readiness 쿠버네티스 연동
 - @ConfigurationProperties 퀴즈
+- Actuator, configprops 엔드포인트
