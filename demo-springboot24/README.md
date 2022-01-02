@@ -64,3 +64,24 @@
   * https://spring.io/blog/2020/08/14/config-file-processing-in-spring-boot-2-4
   * https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-Config-Data-Migration-Guide
   * https://docs.spring.io/spring-boot/docs/2.4.0-SNAPSHOT/reference/htmlsingle/#boot-features-external-config-files
+
+## 설정 파일 추가
+- 설정 파일 추가
+  * spring.config.import
+  * spring.config.active.on-profile과 같이 사용할 수 있다. (프로파일을 추가하는 것은 안되지만, 설정 파일을 추가하는 것은 허용)
+  * 추가하는 설정 파일을 제일 아래 있는 문서로 취급한다. 즉, 기존의 다른 설정을 덮어쓴다.
+- application.properties
+
+```properties
+spring.config.activate.on-profile=local
+spring.config.import=classpath:local.properties
+my.message=스프링 부트 2.4
+```
+
+- local.properties
+
+```properties
+my.message=스프링 부트 2.4.3
+```
+
+- 이 경우에 local.properties를 제일 아래 있는 설정으로 취급하여 application.properties 설정을 덮어쓴다.  
