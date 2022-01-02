@@ -85,3 +85,21 @@ my.message=스프링 부트 2.4.3
 ```
 
 - 이 경우에 local.properties를 제일 아래 있는 설정으로 취급하여 application.properties 설정을 덮어쓴다.  
+
+## Configuration Tree 지원
+- spring.config.import의 값으로는 여러 접두어를 지원하는데 아무런 접두어도 사용하지 않으면 일반적인 파일이나 디렉토리 (입력값이 슬래시(/)로 끝나는 경우) 로 인식한다.
+- configtree: 접두어를 사용하면 Configuration Tree 스타일의 볼륨 기반 설정 트리를 지정할 수 있다.
+- optional: 접두어를 사용하면 해당 디렉토리 또는 파일이 존재하지 않아도 에러가 발생하지 않는다.
+- application.properties
+
+```properties
+spring.config.import=configtree:config
+```
+
+- // Configuration Tree
+
+```bash
+config/
+ +- my/
+     +- message
+```
