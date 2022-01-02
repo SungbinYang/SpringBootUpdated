@@ -34,3 +34,33 @@
       <scope>runtime</scope>
   </dependency>
   ```
+
+## 설정 파일 처리 방식 변경
+- 기존 application.properteis와 application.yaml의 문제들
+  * 문제 1. application.properties는 여러 문서를 표현할 수 없다.
+  * 문제 2. spring.profiles (설정을 적용할 프로파일) 이름이 모호하다.
+  * 문제 3. 설정을 읽어들이는 순서가 복잡하다.
+- 문제 1 해결. 스프링 부트 2.4부터는 application.properties 도 파일 하나에 여러 문서를 표현할 수 있다.
+  * // application.properties
+  
+  ```properties
+  my.message=스프링 부트 2.1
+  #---
+  my.message=스프링 부트 2.2
+  #---
+  my.message=스프링 부트 2.3
+  ```
+
+  * '#---' 를 사용해서 문서를 구분한다.
+  * 아직 IDEA가 제대로 이해하지 못할 수 있다.
+  * 아래 있는 문서가 위에 있는 문서의 값을 덮어쓴다.
+
+- 문제 2 해결. spring.profiles 대신 보다 직관적인 spring.config.activate.on-profile 를 사용한다.
+  * spring.config.activate.on-profile: 현재 설정을 적용할 프로파일
+  * spring.profiles.active 사용할 프로파일
+  * spring.profiles.include 추가로 사용할 프로파일
+- 문제 3 해결. 특정 프로파일을 사용하거나 추가하는 설정과 현재 설정을 적용할 프로파일을 같이 사용할 수 없다.
+- 참고
+  * https://spring.io/blog/2020/08/14/config-file-processing-in-spring-boot-2-4
+  * https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-Config-Data-Migration-Guide
+  * https://docs.spring.io/spring-boot/docs/2.4.0-SNAPSHOT/reference/htmlsingle/#boot-features-external-config-files
