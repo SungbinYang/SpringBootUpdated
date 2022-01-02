@@ -94,3 +94,14 @@ public void onStateChanged(AvailabilityChangeEvent<ReadinessState> readiness) {
 
 - 참고
   * https://docs.spring.io/spring-boot/docs/current/actuator-api/html/#overview
+
+## Properties 파일에 한글을 쓰면 왜 깨지는걸까?
+- 자바는 properties 파일을 ISO 8859-1 인코딩을 사용해서 읽어들이고 해당 인코딩으로 표현할 수 없는 문자는 Unicode로 작성해야 합니다.
+- https://docs.oracle.com/javase/8/docs/api/java/util/Properties.html
+
+>The load(Reader) / store(Writer, String) methods load and store properties from and to a character based stream in a simple line-oriented format specified below. The load(InputStream) / store(OutputStream, String) methods work the same way as the load(Reader)/store(Writer, String) pair, except the input/output stream is encoded in ISO 8859-1 character encoding. Characters that cannot be directly represented in this encoding can be written using Unicode escapes as defined in section 3.3 of The Java™ Language Specification; only a single 'u' character is allowed in an escape sequence. The native2ascii tool can be used to convert property files to and from other character encodings.
+
+- 즉, properties 파일에 한글을 쓰고 싶다면 유니코드로 변경해서 입력을 해야 합니다.
+- 그러나! 우리가 일일히 변환을 하면 불편하기 때문에 IDE가 알아서 해줍니다. (체크 하세요.)
+
+![](./img02.png)

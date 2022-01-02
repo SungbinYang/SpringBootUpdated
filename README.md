@@ -34,3 +34,4 @@
 - Liveness와 Readiness 쿠버네티스 연동
 - @ConfigurationProperties 퀴즈
 - Actuator, configprops 엔드포인트
+- Properties 파일에 한글을 쓰면 왜 깨지는걸까?
