@@ -1,4 +1,4 @@
-package me.sungbin.springboot23;
+package me.sungbin.demospringboot24;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.availability.ApplicationAvailability;
@@ -19,8 +19,9 @@ public class HelloController {
 
     @GetMapping("/hello")
     public String hello() {
-        return "Application is now " + applicationAvailability.getLivenessState() + " "
-                + applicationAvailability.getReadinessState() + " " + localhostService.getLocalHostInfo()
+        return "Application is now " + applicationAvailability.getLivenessState()
+                + " " + applicationAvailability.getReadinessState()
+                + " " + localhostService.getLocalHostInfo()
                 + " " + myProperties.getMessage();
     }
 }

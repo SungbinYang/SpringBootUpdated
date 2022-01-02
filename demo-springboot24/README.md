@@ -103,3 +103,45 @@ config/
  +- my/
      +- message
 ```
+
+## 스프링 부트와 쿠버네티스 ConfigMap 연동
+- 앞서 살펴본, Optional 접두어와 쿠버네티스가 지원하는 ConfigMap을 연동하여 쿠버네티스로 구동시 특정한 프로퍼티를 읽도록 설정할 수 있다.
+- 쿠버네티스 [ConfigMap](https://kubernetes.io/docs/concepts/configuration/configmap/)
+  * 쿠버네티스가 지원하는 [볼륨](https://kubernetes.io/docs/concepts/storage/volumes/#configmap) 중에 하나로 설정 데이터를 Pod에 추가하는 방법을 제공한다.
+  * 특정 환경에 종속적인 값들을 컨테이너와 분리할 수 있다.
+  * 컨테이너는 Pod에 마운트 되어있는 ConfigMap 볼륨에 들어있는 설정을 참조하여 사용할 수 있다.
+- 스프링 부트와 ConfigMap 연동
+  * 쿠버네티스의 ConfigMap에 들어있는 설정을 스프링 부트 애플리케이션에서 @ConfigurationProperties또는 Envionment를 통해 접근할 수 있다.
+- ConfigMap 정의
+
+  ```yaml
+  apiVersion: v1
+  kind: ConfigMap
+  metadata:
+    name: k8s-configmap
+  data:
+    application.properties: |
+      my.message: hello kubernetes
+  ```
+  
+- 볼륨 정의 및 마운팅
+
+  ```yaml
+  spec:
+        volumes:
+          - name: k8s-configmap-volume
+            configMap:
+              name: k8s-configmap
+        containers:
+          - name: app-demo
+            image: demo-springboot24:0.0.1-SNAPSHOT
+            volumeMounts:
+              - mountPath: /etc/config
+                name: k8s-configmap-volume
+  ```
+
+쿠버네티스 Pod 쉘 열기
+
+```bash
+kubectl exec --stdin --tty [Pod 이름] -- /bin/bash
+```

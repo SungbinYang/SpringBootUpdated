@@ -43,3 +43,4 @@
 - 설정 파일 처리 방식 변경
 - 설정 파일 추가
 - Configuration Tree 지원
+- 스프링 부트와 쿠버네티스 ConfigMap 연동
